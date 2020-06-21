@@ -1,0 +1,85 @@
+<div class="row">
+
+  <div class="col-md-5">
+    <form class="border rounded p-3 text-white bg-dark" #form="ngForm" (ngSubmit)="Submit(form)">
+  
+      <div class="form-group">
+
+        <input class="form-control" 
+               placeholder="Enter deposit...."
+               type="number"
+               min="0"
+               name="deposit"
+               [disabled]="isActive"
+               required
+               ngModel/>
+
+      </div>
+    
+      <div class="form-group">
+        <input class="form-control"     
+               placeholder="Enter stake amount...." 
+               type="number"
+               min="0"
+               name="stackAmount"
+               required
+               [disabled]="isActive"
+               ngModel/>
+      </div>
+    
+      <button class="btn btn-info"
+              style="width: 100%;" 
+              type="submit"
+              [disabled]="!form.valid">
+              Start Game
+      </button>
+     
+    </form>
+
+    <div class="border rounded p-3 text-white bg-dark mt-3" style="height: 170px;">
+
+      <div *ngIf="isActive">
+
+        <h5> You have won: {{ winningAmount}} </h5>
+        <h5> Current ballance is: {{ deposit}} </h5>
+        <button class="btn btn-danger mt-3"
+                style="width: 100%;"
+                (click)="SpinAgain()">
+          Spin again
+        </button>
+
+      </div>
+
+      <div *ngIf="!isActive && initialLoad">
+        <h5>Start new game!!!</h5>
+      </div>
+
+      <div *ngIf="errorMessage" class="text-danger">
+        <h5>{{ errorMessage }}</h5>
+      </div>
+
+      <div *ngIf="!isActive && !initialLoad">
+        <h5>Sorry my friend you loose the game!!! You can start new one!!!</h5>
+      </div>
+
+    </div>
+
+  </div>
+  
+  
+  <div class="col-md-7">
+  
+    <table class="table table-bordered table-dark p-3">
+      <tbody>
+        <tr *ngFor="let payline of paylines">
+          <td *ngFor="let slot of payline">
+              <app-slot [value]="slot"></app-slot>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+  
+</div>
+
