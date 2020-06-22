@@ -44,7 +44,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\ConsoleSlotMachine\SlotMachinesLibrary\SlotMachinesLibrary.csproj" />
+    <Reference Include="SlotMachinesLibrary">
+      <HintPath>bin\Debug\netcoreapp2.2\SlotMachinesLibrary.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
